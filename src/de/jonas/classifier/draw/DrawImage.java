@@ -38,8 +38,16 @@ public class DrawImage {
             @Override
             public void mouseMoved(MouseEvent e) {
                 if(mousePressed) {
-                    System.out.println(e.getX() + ":" + e.getY());
-                    colorList.put(e.getX() + ":" + e.getY(), "B");
+
+                    int offsetX = 2, offsetY = 2;
+
+                    for(int x = e.getX()-offsetX; x < e.getX()+offsetX; x++) {
+                        for(int y = e.getY()-offsetY; y < e.getY()+offsetY; y++) {
+                            colorList.put(x + ":" + y, "B");
+                        }
+                    }
+
+                    //colorList.put(e.getX() + ":" + e.getY(), "B");
                     drawnImage = drawImageFromPixelMap();
                     drawOn.setIcon(new ImageIcon(drawnImage));
                     drawOn.repaint();

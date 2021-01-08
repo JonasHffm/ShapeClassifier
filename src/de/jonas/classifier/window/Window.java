@@ -25,6 +25,7 @@ public class Window {
     private JFrame frame;
     private JFileChooser fileChooser;
     private BufferedImage toParse;
+    private JLabel result;
 
     //Image
     private String uploadedImageName;
@@ -140,6 +141,14 @@ public class Window {
         frame.add(chooseButton);
         //
 
+        //add result text
+        result = new JLabel();
+        result.setBounds(200, 10, 300, 50);
+        result.setText("Result: n/A");
+        result.setFont(new Font("Serif", Font.PLAIN, 20));
+        frame.add(result);
+        //
+
         //add parse button
         JButton parseButton = new JButton();
         parseButton.setBounds(512, 260, 100, 25);
@@ -232,7 +241,7 @@ public class Window {
                     HashMap<BufferedImage, Double> sortedMap = new ImageParser().compare(pixelMap, pixelMap.size());
                     int count = 0;
                     for(BufferedImage image : sortedMap.keySet()) {
-                        System.out.println("Setting up panels for image: " + count);
+                        //System.out.println("Setting up panels for image: " + count);
                         DecimalFormat decimalFormat = new DecimalFormat("#.#");
                         if(count == 0) {
                             compareOne.setIcon(new ImageIcon(image));
@@ -289,4 +298,51 @@ public class Window {
         frame.add(drawnImageButtonClear);
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    public JFileChooser getFileChooser() {
+        return fileChooser;
+    }
+
+    public void setFileChooser(JFileChooser fileChooser) {
+        this.fileChooser = fileChooser;
+    }
+
+    public BufferedImage getToParse() {
+        return toParse;
+    }
+
+    public void setToParse(BufferedImage toParse) {
+        this.toParse = toParse;
+    }
+
+    public JLabel getResult() {
+        return result;
+    }
+
+    public void setResult(JLabel result) {
+        this.result = result;
+    }
+
+    public String getUploadedImageName() {
+        return uploadedImageName;
+    }
+
+    public void setUploadedImageName(String uploadedImageName) {
+        this.uploadedImageName = uploadedImageName;
+    }
+
+    public HashMap<String, String> getPixelMap() {
+        return pixelMap;
+    }
+
+    public void setPixelMap(HashMap<String, String> pixelMap) {
+        this.pixelMap = pixelMap;
+    }
 }

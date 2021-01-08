@@ -24,6 +24,18 @@ public class ImageManager {
         ShapeClassifier.initializer.getMySQL().update("INSERT INTO Shapes(image, shape) VALUES ('" + imageName + "', '" + shapeStr.toString() + "')");
     }
 
+    public String getNameFromPixelMap(String pixelMap) {
+        ResultSet rs = ShapeClassifier.initializer.getMySQL().getResults("SELECT * FROM Shapes WHERE shape = '" + pixelMap + "'");
+        try {
+            while (rs.next()) {
+                return rs.getString("image");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public void loadAllPixelImages() {
         ShapeClassifier.initializer.getData().getShapes().clear();
 
