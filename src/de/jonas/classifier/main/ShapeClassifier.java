@@ -30,6 +30,7 @@ public class ShapeClassifier implements Initializer{
             initializer.mySQL.update("CREATE TABLE IF NOT EXISTS Shapes(image VARCHAR(100), shape LONGTEXT)");
         //
 
+        //new ImageManager().uploadFolderToDatabase();
         new ImageManager().loadAllPixelImages();
         System.out.println("All shapes : " + data.getShapes());
 

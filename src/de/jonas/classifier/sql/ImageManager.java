@@ -1,8 +1,14 @@
 package de.jonas.classifier.sql;
 
+import de.jonas.classifier.image.ImageParser;
 import de.jonas.classifier.main.ShapeClassifier;
 import de.jonas.classifier.obj.Shape;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -51,6 +57,22 @@ public class ImageManager {
             System.out.println("All loaded shapes : " + ShapeClassifier.initializer.getData().getShapes());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public void uploadFolderToDatabase() {
+        File file = new File("DatabaseDownloads/data");
+        if(file.exists()) {
+        for(File fileList : file.listFiles()) {
+            try {
+                System.out.println("Upload Folder -> " + fileList.getName() + " to database...");
+                Image image = ImageIO.read(fileList);
+                BufferedImage toUpload = new ImageParser().createBlackAndWhiteCopy(image, 200, 200);
+                uploadImage(fileList.getName().replace(".png", ""), new ImageParser().parseImageToPixelMap(toUpload));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         }
     }
 
